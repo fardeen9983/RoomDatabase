@@ -10,7 +10,4 @@ data class Student(@PrimaryKey var id: String,
                    var phone: Long,
                    var email: String,
                    var address: String,
-                   var enrollno: Long) : Serializable{
-    constructor():
-            this("","",-1,"","",-1)
-}
+                   var enrollno: Long) : Serializable
