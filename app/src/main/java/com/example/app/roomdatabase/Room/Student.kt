@@ -8,6 +8,4 @@ import java.io.Serializable
 data class Student(@PrimaryKey var id: String,
                    var name: String,
                    var phone: Long,
-                   var email: String,
-                   var address: String,
-                   var enrollno: Long) : Serializable
+                   var email: String) : Serializable
