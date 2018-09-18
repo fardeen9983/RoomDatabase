@@ -5,23 +5,25 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [Student::class],version = 1)
-abstract class StudentDatabase : RoomDatabase(){
+@Database(entities = [Student::class], version = 1)
+abstract class StudentDatabase : RoomDatabase() {
 
-    abstract fun studentDAO() : StudentDAO
+    abstract fun studentDAO(): StudentDAO
 
     companion object {
-        private var INSTANCE : StudentDatabase? = null
+        private var INSTANCE: StudentDatabase? = null
 
-        fun getInstance(context: Context) : StudentDatabase?{
-            if (INSTANCE == null)
-                INSTANCE = Room.databaseBuilder(context,StudentDatabase::class.java,
-                        "student.db").build()
+        fun getInstance(context: Context): StudentDatabase? {
+            synchronized(StudentDatabase::class) {
+                if (INSTANCE == null)
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, StudentDatabase::class.java,
+                            "student.db").build()
+            }
             return INSTANCE
         }
     }
 
-    fun destroyInstance(){
-        INSTANCE =null
+    fun destroyInstance() {
+        INSTANCE = null
     }
 }

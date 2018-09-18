@@ -16,7 +16,7 @@ interface StudentDAO {
     fun getStudent(id: String): Student
 
     @Query("SELECT * FROM student")
-    fun getAllStudents() : List<Student>
+    fun getAllStudents() : MutableList<Student>
 
     @Update(onConflict = REPLACE)
     fun update(student: Student)
