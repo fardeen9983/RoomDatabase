@@ -1,5 +1,6 @@
 package com.example.app.roomdatabase.Room
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 
@@ -16,7 +17,7 @@ interface StudentDAO {
     fun getStudent(id: String): Student
 
     @Query("SELECT * FROM student")
-    fun getAllStudents() : List<Student>
+    fun getAllStudents() : LiveData<List<Student>>
 
     @Update(onConflict = REPLACE)
     fun update(student: Student)
