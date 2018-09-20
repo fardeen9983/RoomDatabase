@@ -21,18 +21,20 @@ class MainActivity : AppCompatActivity() {
         studList.emptyView = emptyView
         studList.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, students)
 
-        studList.setOnItemClickListener { _, _, pos, _ ->
-            val student = DB.studentDAO().getStudent(pos.toString())
+        studList.setOnItemClickListener { a, b, pos, c ->
+            val student = a.getItemAtPosition(pos) as Student
             val intent = Intent(this, ViewStudent::class.java)
-            intent.putExtra("student", student)
+            intent.putExtra("id",student.id)
             startActivity(intent)
+        }
+
+        add.setOnClickListener {
+            startActivity(Intent(this,AddStudent::class.java))
         }
     }
 
     fun getStudents() {
-        Runnable {
             students = DB.studentDAO().getAllStudents()
-        }
     }
 
 }
